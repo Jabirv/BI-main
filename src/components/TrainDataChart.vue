@@ -239,8 +239,6 @@ onMounted(() => {
       <div class="chart-container">
         <Bar :data="chartData" :options="chartOptions" />
       </div>
-      
-      <StatisticsCards :data="trainData" />
 
       <div class="yearly-chart-container">
         <Line :data="yearlyData" :options="yearlyChartOptions" />
@@ -249,6 +247,8 @@ onMounted(() => {
       <div class="prediction-box">
         <p>D'après nos estimations sur le mois de juin 2025, les trains auront un retard de 20 mins.</p>
       </div>
+      
+      <StatisticsCards :data="trainData" />
     </div>
   </div>
 </template>
