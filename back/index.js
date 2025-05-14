@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.json());
 
 app.get("/hello", getHello);
-app.get("/get-data", getData);
+app.get("/data", getData);
 
 app.listen(port, () => {
   console.log(`Serveur démarré sur http://localhost:${port}`);
