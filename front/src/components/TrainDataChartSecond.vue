@@ -27,26 +27,22 @@ ChartJS.register(
   LineElement
 );
 
-const nbTrains = ref<any>(null); // la donnée qu'on va remplir
+const nbTrains = ref<number | null>(null);
 
 onMounted(async () => {
   try {
-    const url =
-      "https://ressources.data.sncf.com/api/explore/v2.1/catalog/datasets/regularite-mensuelle-tgv-aqst/records?select=nb_train_prevu&where=gare_depart%20LIKE%20%22MARSEILLE%20ST%20CHARLES%22%20AND%20gare_arrivee%20LIKE%20%22MARNE%20LA%20VALLEE%22%20AND%20date%20%3E%3D%20%222024-12-01%22%20AND%20date%20%3C%20%222025-01-01%22";
-
+    const url = "http://localhost:3000/data";
     const res = await fetch(url);
     const json = await res.json();
 
-    // Accès aux données dans json.results
-    if (json.results && json.results.length > 0) {
-      nbTrains.value = json.results.map((item: any) => item.nb_train_prevu);
-      console.log(nbTrains.value);
-    } else {
-      nbTrains.value = [];
-    }
+    console.log("📦 Données brutes reçues :", json);
+
+    // nbTrains.value = json.nb_train_prevu;
+    nbTrains.value = json;
+    console.log("✅ nbTrains.value =", nbTrains.value);
   } catch (err) {
-    console.error("Erreur lors de l’appel à l’API SNCF:", err);
-    nbTrains.value = [];
+    console.error("❌ Erreur lors de l’appel à l’API:", err);
+    nbTrains.value = null;
   }
 });
 
