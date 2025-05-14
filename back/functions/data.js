@@ -109,11 +109,11 @@ export async function getData(req, res) {
     const data_prct_cause_prise_en_charge_voyageurs = await response_prct_cause_prise_en_charge_voyageurs.json();
     const prct_cause_prise_en_charge_voyageurs = data_prct_cause_prise_en_charge_voyageurs.results[0].prct_cause_prise_en_charge_voyageurs;
 
-    const response_result_planned_train = await fetch(
-      `https://ressources.data.sncf.com/api/explore/v2.1/catalog/datasets/regularite-mensuelle-tgv-aqst/records?select=date,nb_train_prevu,nb_train_depart_retard,nb_annulation&where=gare_depart%20LIKE%20%22${gare_depart}%22%20AND%20gare_arrivee%20LIKE%20%22${gare_arrivee}%22%20AND%20date%20%3E%3D%20%222024-12-01%22%20AND%20date%20%3C%20%222025-01-01%22&order_by=date%20DESC`
+    const response_retard_mois_annee = await fetch(
+      `https://ressources.data.sncf.com/api/explore/v2.1/catalog/datasets/regularite-mensuelle-tgv-aqst/records?select=date,retard_moyen_depart,nb_train_prevu,nb_train_depart_retard,nb_annulation&where=gare_depart%20LIKE%20%22${gare_depart}%22%20AND%20gare_arrivee%20LIKE%20%22${gare_arrivee}%22%20&order_by=date%20DESC&limit=100`
     );
-    const data_result_planned_train = await response_result_planned_train.json();
-    const result_planned_train = data_result_planned_train.results[0];
+    const data_retard_mois_annee = await response_retard_mois_annee.json();
+    const retard_mois_annee = data_retard_mois_annee.results;
 
     res.json({
       nb_train_prevu,
@@ -133,7 +133,7 @@ export async function getData(req, res) {
       prct_cause_materiel_roulant,
       prct_cause_gestion_gare,
       prct_cause_prise_en_charge_voyageurs,
-      result_planned_train,
+      retard_mois_annee,
     });
   } catch (error) {
     console.error("Erreur PostgreSQL :", error);
