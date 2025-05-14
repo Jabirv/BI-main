@@ -1,12 +1,31 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { Bar, Line } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js'
+import { 
+  Chart as ChartJS, 
+  Title, 
+  Tooltip, 
+  Legend, 
+  BarElement, 
+  CategoryScale, 
+  LinearScale,
+  PointElement,
+  LineElement
+} from 'chart.js'
 import { fetchTrainData } from '../services/dataService'
 import type { TrainData } from '../types'
 import StatisticsCards from './StatisticsCards.vue'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement)
+ChartJS.register(
+  Title, 
+  Tooltip, 
+  Legend, 
+  BarElement, 
+  CategoryScale, 
+  LinearScale,
+  PointElement,
+  LineElement
+)
 
 const props = defineProps<{
   selectedDepartureStation: string | null
@@ -71,21 +90,24 @@ const yearlyData = computed(() => {
         data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 30) + 5),
         borderColor: 'rgba(59, 130, 246, 0.8)',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
-        tension: 0.4
+        tension: 0.4,
+        fill: false
       },
       {
         label: '2024',
         data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 30) + 10),
         borderColor: 'rgba(245, 158, 11, 0.8)',
         backgroundColor: 'rgba(245, 158, 11, 0.1)',
-        tension: 0.4
+        tension: 0.4,
+        fill: false
       },
       {
         label: '2025',
         data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 30) + 15),
         borderColor: 'rgba(239, 68, 68, 0.8)',
         backgroundColor: 'rgba(239, 68, 68, 0.1)',
-        tension: 0.4
+        tension: 0.4,
+        fill: false
       }
     ]
   }
@@ -241,7 +263,10 @@ onMounted(() => {
       </div>
 
       <div class="yearly-chart-container">
-        <Line :data="yearlyData" :options="yearlyChartOptions" />
+        <Line 
+          :data="yearlyData" 
+          :options="yearlyChartOptions" 
+        />
       </div>
 
       <div class="prediction-box">
@@ -267,6 +292,10 @@ onMounted(() => {
 .yearly-chart-container {
   height: 400px;
   margin: var(--space-8) 0;
+  padding: var(--space-4);
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
 
 .chart-loading,
@@ -289,7 +318,7 @@ onMounted(() => {
   border: 1px solid var(--color-primary-200);
   border-radius: var(--radius);
   padding: var(--space-4);
-  margin-top: var(--space-4);
+  margin: var(--space-4) 0;
 }
 
 .prediction-box p {
