@@ -1,0 +1,22 @@
+{
+  "name": "bi-main",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix back\" \"npm run dev --prefix front\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jabirv/BI-main.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jabirv/BI-main/issues"
+  },
+  "homepage": "https://github.com/Jabirv/BI-main#readme",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
