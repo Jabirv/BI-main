@@ -261,7 +261,7 @@ onMounted(() => {
       <div class="chart-container">
         <Bar :data="chartData" :options="chartOptions" />
       </div>
-
+      
       <div class="yearly-chart-container">
         <Line 
           :data="yearlyData" 
@@ -271,6 +271,11 @@ onMounted(() => {
 
       <div class="prediction-box">
         <p>D'après nos estimations sur le mois de juin 2025, les trains auront un retard de 20 mins.</p>
+      </div>
+
+      <div class="additional-content">
+        <h3>Ma nouvelle demande</h3>
+        <p>Contenu supplémentaire ajouté à la suite de la page.</p>
       </div>
       
       <StatisticsCards :data="trainData" />
@@ -325,5 +330,18 @@ onMounted(() => {
   color: var(--color-primary-900);
   margin: 0;
   font-weight: var(--font-weight-medium);
+}
+
+.additional-content {
+  margin-top: var(--space-8);
+  padding: var(--space-4);
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.additional-content h3 {
+  color: var(--color-neutral-900);
+  margin-bottom: var(--space-4);
 }
 </style>
