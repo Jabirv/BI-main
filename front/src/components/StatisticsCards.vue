@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { TrainData } from '../types'
+import type { TrainData } from "../types";
 
 defineProps<{
-  data: TrainData | null
-}>()
+  data: TrainData | null;
+}>();
 </script>
 
 <template>
@@ -13,15 +13,27 @@ defineProps<{
       <h3>Statistiques générales</h3>
       <div class="stats-cards">
         <div class="stat-card">
-          <div class="stat-value">{{ Math.round((data.totalTrains - data.delayedDepartures) / data.totalTrains * 100) }}%</div>
+          <div class="stat-value">
+            {{
+              Math.round(
+                ((data.totalTrains - data.delayedDepartures) /
+                  data.totalTrains) *
+                  100
+              )
+            }}%
+          </div>
           <div class="stat-label">Trains partis à l'heure</div>
         </div>
         <div class="stat-card warning">
-          <div class="stat-value">{{ Math.round(data.delayedDepartures / data.totalTrains * 100) }}%</div>
+          <div class="stat-value">
+            {{ Math.round((data.delayedDepartures / data.totalTrains) * 100) }}%
+          </div>
           <div class="stat-label">Trains partis en retard</div>
         </div>
         <div class="stat-card error">
-          <div class="stat-value">{{ Math.round(data.delayedArrivals / data.totalTrains * 100) }}%</div>
+          <div class="stat-value">
+            {{ Math.round((data.delayedArrivals / data.totalTrains) * 100) }}%
+          </div>
           <div class="stat-label">Trains arrivés en retard</div>
         </div>
       </div>
@@ -32,11 +44,15 @@ defineProps<{
       <h3>Moyennes des retards</h3>
       <div class="stats-cards">
         <div class="stat-card info">
-          <div class="stat-value">{{ Math.round(data.averageDelayDeparture) }} min</div>
+          <div class="stat-value">
+            {{ Math.round(data.averageDelayDeparture) }} min
+          </div>
           <div class="stat-label">Retard moyen au départ</div>
         </div>
         <div class="stat-card info">
-          <div class="stat-value">{{ Math.round(data.averageDelayArrival) }} min</div>
+          <div class="stat-value">
+            {{ Math.round(data.averageDelayArrival) }} min
+          </div>
           <div class="stat-label">Retard moyen à l'arrivée</div>
         </div>
       </div>

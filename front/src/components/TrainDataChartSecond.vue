@@ -27,29 +27,28 @@ ChartJS.register(
   LineElement
 );
 
-const nbTrains = ref<number | null>(null);
-
-onMounted(async () => {
-  try {
-    const url = "http://localhost:3000/data";
-    const res = await fetch(url);
-    const json = await res.json();
-
-    console.log("📦 Données brutes reçues :", json);
-
-    // nbTrains.value = json.nb_train_prevu;
-    nbTrains.value = json;
-    console.log("✅ nbTrains.value =", nbTrains.value);
-  } catch (err) {
-    console.error("❌ Erreur lors de l’appel à l’API:", err);
-    nbTrains.value = null;
-  }
-});
+const dataFetched = ref<number | null>(null);
 
 const props = defineProps<{
-  selectedDepartureStation: string | null;
-  selectedArrivalStation: string | null;
+  selectedDepartureStation: any;
+  selectedArrivalStation: any;
 }>();
+// onMounted(async () => {
+//   try {
+//     const url = `http://localhost:3000/data?gare_depart=${selectedDepartureStation.value}&gare_arrivee=${selectedArrivalStation.value}`;
+//     const res = await fetch(url);
+//     const json = await res.json();
+
+//     // console.log("📦 Données brutes reçues :", json);
+
+//     // nbTrains.value = json.nb_train_prevu;
+//     stationsName.value = json;
+//     // console.log("✅ nbTrains.value =", stationsName.value);
+//   } catch (err) {
+//     console.error("❌ Erreur lors de l’appel à l’API:", err);
+//     stationsName.value = null;
+//   }
+// });
 
 const isLoading = ref(false);
 const error = ref<string | null>(null);
@@ -283,10 +282,25 @@ onMounted(() => {
     loadData();
   }
 });
+
+const goData = async () => {
+  try {
+    const url = `http://localhost:3000/data?gare_depart=${props.selectedDepartureStation}&gare_arrivee=${props.selectedArrivalStation}`;
+    const res = await fetch(url);
+    const json = await res.json();
+
+    dataFetched.value = json;
+    // console.log(dataFetched.value);
+  } catch (err) {
+    console.error("❌ Erreur lors de l’appel à l’API:", err);
+    dataFetched.value = null;
+  }
+};
 </script>
 
 <template>
   <div class="chart-wrapper">
+    <!-- <button @click="goData()">CLICK BITCH</button> -->
     <div v-if="isLoading" class="chart-loading">Chargement des données...</div>
 
     <div v-else-if="error" class="chart-error">

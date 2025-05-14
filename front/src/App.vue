@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import FilterPanel from "./components/FilterPanel.vue";
 import AppHeader from "./components/AppHeader.vue";
 import { Station } from "./types";
@@ -10,6 +10,32 @@ const isLoading = ref(true);
 const stations = ref<Station[]>([]);
 const selectedDepartureStation = ref<string | null>(null);
 const selectedArrivalStation = ref<string | null>(null);
+
+watch(
+  selectedDepartureStation,
+  (newVal, oldVal) => {
+    console.log(
+      "🛤️ Station de départ (initiale ou modifiée) :",
+      oldVal,
+      "→",
+      newVal
+    );
+  },
+  { immediate: true }
+);
+
+watch(
+  selectedArrivalStation,
+  (newVal, oldVal) => {
+    console.log(
+      "🛤️ Station de départ (initiale ou modifiée) :",
+      oldVal,
+      "→",
+      newVal
+    );
+  },
+  { immediate: true }
+);
 
 onMounted(async () => {
   try {
