@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import { getData } from "./functions/data.js";
 import { getHello } from "./functions/hello.js";
@@ -5,6 +6,7 @@ import { getHello } from "./functions/hello.js";
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/hello", getHello);
